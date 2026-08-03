@@ -81,6 +81,14 @@ The server starts on `http://127.0.0.1:8100` — the MCP endpoint is
 `http://127.0.0.1:8100/mcp`. The database (SQLite) and media workspace are
 created on first run.
 
+Or with Docker (ffmpeg, melt and fonts included in the image):
+
+```bash
+docker build -t mcpcut .
+docker run -p 127.0.0.1:8100:8100 -e MCP_TRANSPORT=streamable-http \
+  -v mcpcut-data:/data mcpcut
+```
+
 > **Single-user by design.** This build has no accounts: whoever can reach
 > the port is the operator, with full tool access including local file paths.
 > Keep it bound to localhost, or put an authenticating reverse proxy in front.
