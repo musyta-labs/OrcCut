@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mcpcut"
+version = "0.1.0"
+description = "A real video editor for AI agents, served over MCP: immutable timeline model, journaled edit history, FFmpeg/MLT rendering, deterministic CLI twin"
+readme = "README.md"
+license = "MIT"
+authors = [{ name = "Musyta Labs" }]
+requires-python = ">=3.12"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Operating System :: POSIX",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Video",
+]
+dependencies = [
+    # Capped below the v2.0.0 major: the server composes directly on top of
+    # streamable_http_app(), so an unpinned major could silently break it.
+    "mcp>=1.28.1,<2.0",
+    "sqlalchemy>=2.0",
+    # Runtime dep, not dev-only: init_db() runs `alembic upgrade head` on
+    # every start, not create_all.
+    "alembic>=1.13",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "Pillow>=10.3",
+    "yt-dlp>=2024.7.1",
+    "starlette>=0.37",
+    "uvicorn>=0.30",
+    # SSRF egress guard (app/net/egress.py) resolves and fetches over httpx.
+    "httpx>=0.27",
+    # Clip event detection (app/analysis/). Light enough to be a hard dep;
+    # an uninstalled extra would mean a silently broken analysis path.
+    "numpy>=2.0",
+    # Worker-thread offload for MCP tool bodies (app/mcp/context.py).
+    "anyio>=4.0",
+]
+
+[project.urls]
+Homepage = "https://mcpcut.com"
+Repository = "https://github.com/musyta-labs/mcpCut"
+
+[project.optional-dependencies]
+dev = ["pytest>=8.2", "ruff>=0.5"]
+# Auto-captions (app/captions/transcribe.py). Heavy (ctranslate2 + a model
+# download on first use) so it stays optional — imported lazily.
+asr = ["faster-whisper>=1.0"]
+# Local voiceover synthesis (app/tts/synthesize.py). Heavy, and piper-tts is
+# GPL-3.0 — see THIRD_PARTY_NOTICES.md. Imported lazily; installing it is the
+# operator's explicit choice.
+tts = ["piper-tts>=1.5"]
+# PostgreSQL instead of the default SQLite (DATABASE_URL=postgresql+psycopg://…).
+# The engine construction is dialect-gated: a SQLite deployment never imports it.
+postgres = ["psycopg[binary]>=3.1"]
+# S3-compatible artifact storage (ARTIFACT_BACKEND=s3). Imported lazily; the
+# default local backend never touches it.
+s3 = ["minio>=7.2"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B"]
+ignore = ["E501"]

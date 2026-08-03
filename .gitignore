@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+.env
+data/
+media/
+models/
+.pytest_cache/
+.ruff_cache/

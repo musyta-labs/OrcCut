@@ -1,0 +1,33 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: python -m pip install -e ".[dev]"
+      - name: Lint
+        run: python -m ruff check app
+      - name: Compile
+        run: python -m compileall -q app
+      - name: Smoke — fresh DB migrates, CLI round-trips, server composes
+        env:
+          MCP_AUTH_ENABLED: "false"
+          DATABASE_URL: "sqlite:///./editor.db"
+        run: |
+          python -c "from app.db.base import init_db; init_db()"
+          echo '{"op": "create_project", "args": {"metadata": {}}}' > /tmp/ops.json
+          python -m app.mcp.cli /tmp/ops.json
+          python -c "from app.mcp import server; assert server._compose_http_app(server.mcp_server) is not None"
