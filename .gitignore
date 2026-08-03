@@ -3,8 +3,10 @@ __pycache__/
 *.egg-info/
 .venv/
 .env
-data/
-media/
-models/
+# Workspace directories at the repo ROOT only — a bare "media/" would also
+# swallow the app/media package (it did, once: CI-breaking lesson).
+/data/
+/media/
+/models/
 .pytest_cache/
 .ruff_cache/
