@@ -1,8 +1,8 @@
-# mcpCut
+# Orccut
 
 **A real video editor for AI agents, served over MCP.**
 
-mcpCut gives any MCP-capable agent (Claude Code, Claude Desktop, or anything
+Orccut gives any MCP-capable agent (Claude Code, Claude Desktop, or anything
 else that speaks the protocol) an actual editing model — not a wrapper around
 one ffmpeg command. Projects are immutable snapshots with a journaled history
 of named operations; rendering goes through FFmpeg or the MLT framework; a
@@ -10,12 +10,12 @@ deterministic CLI twin drives the same logic without a server.
 
 ## Two ways to use it
 
-**☁️ Hosted (fastest — no install).** [mcpcut.com](https://mcpcut.com) runs
+**☁️ Hosted (fastest — no install).** [orccut.com](https://orccut.com) runs
 this editor as a service, with a browser editor on top: sign up, create an
 API token, and point your agent at the cloud MCP endpoint:
 
 ```bash
-claude mcp add --transport http mcpcut https://mcpcut.com/mcp \
+claude mcp add --transport http orccut https://orccut.com/mcp \
   --header "Authorization: Bearer <your token>"
 ```
 
@@ -70,7 +70,7 @@ apt install ffmpeg melt fonts-dejavu-core fonts-noto-color-emoji
 ## Quickstart
 
 ```bash
-git clone https://github.com/musyta-labs/mcpCut && cd mcpCut
+git clone https://github.com/musyta-labs/orccut && cd orccut
 python3 -m venv .venv && .venv/bin/pip install -e .
 
 cp .env.example .env       # MCP_AUTH_ENABLED=false is already set there
@@ -84,9 +84,9 @@ created on first run.
 Or with Docker (ffmpeg, melt and fonts included in the image):
 
 ```bash
-docker build -t mcpcut .
+docker build -t orccut .
 docker run -p 127.0.0.1:8100:8100 -e MCP_TRANSPORT=streamable-http \
-  -v mcpcut-data:/data mcpcut
+  -v orccut-data:/data orccut
 ```
 
 > **Single-user by design.** This build has no accounts: whoever can reach
@@ -100,7 +100,7 @@ docker run -p 127.0.0.1:8100:8100 -e MCP_TRANSPORT=streamable-http \
 Claude Code:
 
 ```bash
-claude mcp add --transport http mcpcut http://127.0.0.1:8100/mcp
+claude mcp add --transport http orccut http://127.0.0.1:8100/mcp
 ```
 
 Any other MCP client, in its JSON config:
@@ -108,7 +108,7 @@ Any other MCP client, in its JSON config:
 ```json
 {
   "mcpServers": {
-    "mcpcut": { "type": "http", "url": "http://127.0.0.1:8100/mcp" }
+    "orccut": { "type": "http", "url": "http://127.0.0.1:8100/mcp" }
   }
 }
 ```

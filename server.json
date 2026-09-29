@@ -1,17 +1,17 @@
 {
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-09-29/server.schema.json",
-  "name": "io.github.musyta-labs/mcpcut",
+  "name": "io.github.musyta-labs/orccut",
   "description": "A real timeline video editor for AI agents: journaled edits, FFmpeg/MLT rendering, exports",
   "repository": {
-    "url": "https://github.com/musyta-labs/mcpCut",
+    "url": "https://github.com/musyta-labs/orccut",
     "source": "github"
   },
   "version": "0.1.0",
-  "websiteUrl": "https://mcpcut.com",
+  "websiteUrl": "https://orccut.com",
   "remotes": [
     {
       "type": "streamable-http",
-      "url": "https://mcpcut.com/mcp"
+      "url": "https://orccut.com/mcp"
     }
   ]
 }

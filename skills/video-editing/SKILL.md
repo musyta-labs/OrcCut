@@ -1,13 +1,13 @@
 ---
 name: video-editing
-description: Edit and render video through the mcpCut MCP server — create projects, build timelines from local or URL media, add text/captions/music, validate, and export. Use whenever the user asks to cut, assemble, caption, or render video.
+description: Edit and render video through the Orccut MCP server — create projects, build timelines from local or URL media, add text/captions/music, validate, and export. Use whenever the user asks to cut, assemble, caption, or render video.
 ---
 
-# Editing video through mcpCut
+# Editing video through Orccut
 
 Works the same against a self-hosted server (`http://127.0.0.1:8100/mcp`) or
-the hosted service at `https://mcpcut.com/mcp` (bearer token, browser editor
-on top — the user sees your edits live at mcpcut.com/projects).
+the hosted service at `https://orccut.com/mcp` (bearer token, browser editor
+on top — the user sees your edits live at orccut.com/projects).
 
 You are connected to a real video editor. It keeps **projects**: immutable
 timeline snapshots with a journaled history. Every tool call that edits

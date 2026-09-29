@@ -990,7 +990,7 @@ def _mix_transition_xml(*, a_track: int, b_track: int) -> str:
 
 def _profile_xml(*, width: int, height: int, fps: int) -> str:
     return (
-        f'<profile description="mcpcut" width="{width}" height="{height}" '
+        f'<profile description="orccut" width="{width}" height="{height}" '
         'progressive="1" sample_aspect_num="1" sample_aspect_den="1" '
         f'frame_rate_num="{fps}" frame_rate_den="1" colorspace="709"/>'
     )

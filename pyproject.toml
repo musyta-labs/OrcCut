@@ -3,7 +3,7 @@ requires = ["setuptools>=69"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mcpcut"
+name = "orccut"
 version = "0.1.0"
 description = "A real video editor for AI agents, served over MCP: immutable timeline model, journaled edit history, FFmpeg/MLT rendering, deterministic CLI twin"
 readme = "README.md"
@@ -41,8 +41,8 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://mcpcut.com"
-Repository = "https://github.com/musyta-labs/mcpCut"
+Homepage = "https://orccut.com"
+Repository = "https://github.com/musyta-labs/orccut"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.2", "ruff>=0.5"]

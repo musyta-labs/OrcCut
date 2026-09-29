@@ -225,7 +225,7 @@ class TrustTieredMCP(FastMCP):
 
 
 mcp_server = TrustTieredMCP(
-    "mcpcut",
+    "orccut",
     host=get_settings().mcp_host,
     port=get_settings().mcp_port,
     auth=_auth_settings,
